@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="justify-content-center mt-5 row">
+    <form action="/auth/login" method="post" class="text-center mb-4">
+      <div class="form-group">
+        <label for="username">email:</label>
+        <input type="text" name="email" id="email" class="form-control" placeholder="your email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="text" name="password" id="password" class="form-control" placeholder="your Password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+      <p>or with your google Account</p>
+      <button id="input-style-google"><a href="/auth/google">Google</a></button>
+
+      {{#if message}}
+      <p class=" err-message">{{message}}</p>
+      {{/if}}
+    </form>
+    <div class="col-12 text-center">
+      <a href="/">Home</a>
+    </div>
+  </div>
+</div>
