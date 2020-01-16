@@ -10,8 +10,10 @@ const logger       = require('morgan');
 const path         = require('path');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
-//const User = require('./models/user');
+const User = require('./models/User');
 
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
 mongoose
   .connect('mongodb://localhost/plancomm', {useNewUrlParser: true})
@@ -33,6 +35,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    cookie: { maxAge: 24 * 60 * 60 },
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    })
+  })
+);
+
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -47,6 +61,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(passport.initialize());
+
+passport.serializeUser((loggedInUser, cb) => {
+  cb(null, loggedInUser._id);
+});
+
+passport.deserializeUser((userIdFromSession, cb) => {
+  User.findById(userIdFromSession)
+    .then(userDocument => {
+      cb(null, userDocument);
+    })
+    .catch(err => {
+      cb(err);
+    })
+});
 
 //Google Auth
 passport.use(new GoogleStrategy(
@@ -55,29 +84,37 @@ passport.use(new GoogleStrategy(
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
+  /*
+  function (accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+    User.findOrCreate({ googleID: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  } 
+  */
   (accessToken, refreshToken, profile, done) => {
     console.log("Google account details:", profile);
 
-    /*
-    User.findOne({ googleID: profile.id })
-      .then(user => {
-        console.log("<<<<<<< ======= >>>>>>>> USER from database: ", user);
-        if (user) {
-          done(null, user);
-          return;
-        }
-        User.create({username: profile.displayName, email: profile._json.Object.value(email), googleID: profile.id })
-          .then(newUser => {
-            console.log(newUser);
-            done(null, newUser);
 
-          })
-          .catch(err => done(err)); // closes User.create()
-      })
-      .catch(err => done(err)); // closes User.findOne()*/
-  }
+     User.findOne({ googleID: profile.id })
+       .then(user => {
+         console.log("User from database: ", user);
+         if (user) {
+          return done(null, user);
+        
+         }
+         User.create({ username: profile.displayName, email: profile._json.email, googleID: profile.id })
+           .then(newUser => {
+             console.log(newUser);
+             return done(null, newUser);
 
-)
+           })
+           .catch(err => done(err)); // closes User.create()
+       })
+       .catch(err => done(err)); // closes User.findOne()
+   }
+
+) 
 );
 
 
