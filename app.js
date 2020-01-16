@@ -11,7 +11,6 @@ const path         = require('path');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const User = require('./models/User');
-
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
@@ -84,14 +83,7 @@ passport.use(new GoogleStrategy(
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
-  /*
-  function (accessToken, refreshToken, profile, cb) {
-    console.log(profile);
-    User.findOrCreate({ googleID: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  } 
-  */
+
   (accessToken, refreshToken, profile, done) => {
     console.log("Google account details:", profile);
 
@@ -116,7 +108,6 @@ passport.use(new GoogleStrategy(
 
 ) 
 );
-
 
 
 // default value for title local

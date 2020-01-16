@@ -3,26 +3,5 @@
 <ul>
 <li>This will contain Game Rooms you will be able to join and discuss about</li>
 <li>random Team generator also planned for implementation</li>
-<h3 style="color:aqua"><p>get started</p></h3>
+<h3 style="color:aqua"><p><a href="/auth/login">get started</a></p></h3>
 </ul>
-
-{{#unless user}}
-  <div>
-    <a href="/auth/google">Login With Google</a>
-  </div>
-{{/unless}}
-
-
-<section id="room">
-<room class="room-box">
-  <p>will be moved to League of Legends Room once created</p>
-<h2>Summoner Search</h2>
-<form action="/lol" method="post">
-  <input type="text" name="name"placeholder="summoner Name"><br>
-</form>
-
- <p>Summoner: {{this.name}}</p>
- <p>Level: {{this.summonerLevel}}</p>
- </room>
-</section>
- </body>

@@ -56,35 +56,28 @@ router.post("/signup", (req, res, next) => {
                 .then(newUser => {
                   console.log(newUser);
                   req.session.user = newUser; // add newUser to session
-                  res.render("authorized/authorized_main");
+                  res.redirect("auth/authorized_main");
                 });
             })
             .catch(err => next(err));
         });
 
       router.post("/login", (req, res, next) => {
-        const {
-          username,
-          password
-        } = req.body;
-        User.findOne({
-            username
-          })
+        const {email, password} = req.body;
+        User.findOne({email})
           .then(foundUser => {
             if (!foundUser)
               return res.render("auth/login", {
-                message: "Invalid credentials"
-              }); // User not found
-
+                message: "Invalid credentials, please Check User or Password"
+              });
             bcrypt.compare(password, foundUser.password).then(exist => {
               if (!exist)
                 return res.render("auth/login", {
-                  message: "Invalid credentials"
-                }); // The password doesn't match
+                  message: "Invalid credentials, please Check User or Password"
+                }); 
 
-              // Log the user in
               req.session.user = foundUser;
-              res.redirect("/authorized/authorized_main");
+              res.redirect("/auth/authorized_main");
             });
           })
           .catch(err => next(err));
@@ -110,7 +103,7 @@ router.post("/signup", (req, res, next) => {
         ]
       }));
       router.get("/google/callback", passport.authenticate("google", {
-        successRedirect: "/authorized/authorized_main",
+        successRedirect: "/auth/authorized_main",
         failureRedirect: "/" // here you would redirect to the login page using traditional login approach
       }));
     

@@ -2,23 +2,25 @@
   <div class="justify-content-center mt-5 row">
     <form action="/auth/login" method="post" class="text-center mb-4">
       <div class="form-group">
-        <label for="username">email:</label>
-        <input type="text" name="email" id="email" class="form-control" placeholder="your email" required>
+        <label for="email">email:</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="your email" required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="text" name="password" id="password" class="form-control" placeholder="your Password" required>
+        <input type="password" name="password" id="password" class="form-control" placeholder="your Password" required>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
-      <p>or with your google Account</p>
-      <button id="input-style-google"><a href="/auth/google">Google</a></button>
-
+      <button type="submit" class="btn btn-primary">Login</button><br><br>
       {{#if message}}
       <p class=" err-message">{{message}}</p>
       {{/if}}
+      <br>
+      <span>dont have an Account now? <a href="/auth/signup">Signup</a> for free and join the rooms</span><br>
+      <span>Or login with
+      <button id="input-style-google"><a href="/auth/google">Google</a></button></span>
+
     </form>
     <div class="col-12 text-center">
-      <a href="/">Home</a>
+      <p><a href="/">back to Home</a></p>
     </div>
   </div>
 </div>
