@@ -10,8 +10,8 @@ const logger       = require('morgan');
 const path         = require('path');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
-//const lol = require('lol-js');
-//const LeagueJs = require('leaguejs/lib/LeagueJS.js');
+//const User = require('./models/user');
+
 
 mongoose
   .connect('mongodb://localhost/plancomm', {useNewUrlParser: true})
@@ -53,14 +53,15 @@ passport.use(new GoogleStrategy(
   {
     clientID:     process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "http://localhost:3000/auth/google/callback"
   },
   (accessToken, refreshToken, profile, done) => {
-    // to see the structure of the data in received response:
     console.log("Google account details:", profile);
 
+    /*
     User.findOne({ googleID: profile.id })
       .then(user => {
+        console.log("<<<<<<< ======= >>>>>>>> USER from database: ", user);
         if (user) {
           done(null, user);
           return;
@@ -73,36 +74,11 @@ passport.use(new GoogleStrategy(
           })
           .catch(err => done(err)); // closes User.create()
       })
-      .catch(err => done(err)); // closes User.findOne()
+      .catch(err => done(err)); // closes User.findOne()*/
   }
+
 )
 );
-
-//League of Legends Api
-/*
-const lolClient = lol.client({
-  apiKey: process.env.LOL_API_KEY,
-  cache: lol.redisCache({host: 'localhost', port: process.env.PORT}),
-});
-lolClient.getChampionById('na', 53, {champData: ['all']})
-  .then(function (data){
-    console.log("Matched the Summoner: ", data.name);
-    lolClient.destroy();
-  });
-
-
-const leagueJs = new LeagueJs(process.env.LOL_API_KEY);
-leagueJs.Summoner
-    .gettingByName('SkyHit')
-    .then(data => {
-        'use strict';
-        console.log(data);
-    })
-    .catch(err => {
-        'use strict';
-        console.log(err);
-    });
-*/
 
 
 

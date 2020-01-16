@@ -53,11 +53,16 @@ router.get("/google", passport.authenticate("google",
     ]
   })
 );
+
 router.get("/google/callback", passport.authenticate("google", 
 {
     successRedirect: "/authorized/authorized_main",
     failureRedirect: "/" // here you would redirect to the login page using traditional login approach
-  })
+  }), function(req, res) {
+    console.log("logged in by google")
+    res.redirect('/');
+  }
+
 );
 
 module.exports = router;
