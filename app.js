@@ -10,6 +10,8 @@ const logger       = require('morgan');
 const path         = require('path');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
+//const lol = require('lol-js');
+//const LeagueJs = require('leaguejs/lib/LeagueJS.js');
 
 mongoose
   .connect('mongodb://localhost/plancomm', {useNewUrlParser: true})
@@ -76,12 +78,43 @@ passport.use(new GoogleStrategy(
 )
 );
 
+//League of Legends Api
+/*
+const lolClient = lol.client({
+  apiKey: process.env.LOL_API_KEY,
+  cache: lol.redisCache({host: 'localhost', port: process.env.PORT}),
+});
+lolClient.getChampionById('na', 53, {champData: ['all']})
+  .then(function (data){
+    console.log("Matched the Summoner: ", data.name);
+    lolClient.destroy();
+  });
+
+
+const leagueJs = new LeagueJs(process.env.LOL_API_KEY);
+leagueJs.Summoner
+    .gettingByName('SkyHit')
+    .then(data => {
+        'use strict';
+        console.log(data);
+    })
+    .catch(err => {
+        'use strict';
+        console.log(err);
+    });
+*/
+
+
+
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
 const auth = require('./routes/auth');
 app.use('/auth', auth);
+
+const lol = require('./routes/lol');
+app.use('/lol', lol);
 
 
 const index = require('./routes/index');
