@@ -11,8 +11,6 @@ const path         = require('path');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const User = require('./models/User');
-//const lol = require('lol-js');
-//const LeagueJs = require('leaguejs/lib/LeagueJS.js');
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -84,7 +82,7 @@ passport.use(new GoogleStrategy(
   {
     clientID:     process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "http://localhost:3000/auth/google/callback"
   },
   /*
   function (accessToken, refreshToken, profile, cb) {
@@ -118,32 +116,6 @@ passport.use(new GoogleStrategy(
 
 ) 
 );
-
-//League of Legends Api
-/*
-const lolClient = lol.client({
-  apiKey: process.env.LOL_API_KEY,
-  cache: lol.redisCache({host: 'localhost', port: process.env.PORT}),
-});
-lolClient.getChampionById('na', 53, {champData: ['all']})
-  .then(function (data){
-    console.log("Matched the Summoner: ", data.name);
-    lolClient.destroy();
-  });
-
-
-const leagueJs = new LeagueJs(process.env.LOL_API_KEY);
-leagueJs.Summoner
-    .gettingByName('SkyHit')
-    .then(data => {
-        'use strict';
-        console.log(data);
-    })
-    .catch(err => {
-        'use strict';
-        console.log(err);
-    });
-*/
 
 
 
