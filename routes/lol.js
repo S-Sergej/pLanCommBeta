@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const LeagueJs = require('leaguejs/lib/LeagueJS.js');
+//const LeagueJs = require('leaguejs/lib/LeagueJS.js');
 
 
 router.get('/', (req, res, next) =>{

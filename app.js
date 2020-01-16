@@ -13,6 +13,9 @@ const passport = require("passport");
 //const lol = require('lol-js');
 //const LeagueJs = require('leaguejs/lib/LeagueJS.js');
 
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+
 mongoose
   .connect('mongodb://localhost/plancomm', {useNewUrlParser: true})
   .then(x => {
@@ -32,6 +35,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    cookie: { maxAge: 24 * 60 * 60 },
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    })
+  })
+);
 
 // Express View engine setup
 
