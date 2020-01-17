@@ -117,12 +117,15 @@ app.locals.title = 'Express - Generated with IronGenerator';
 const auth = require('./routes/auth');
 app.use('/auth', auth);
 
-const lol = require('./routes/lol');
-app.use('/lol', lol);
+const edit_profile = require('./routes/edit_profile');
+app.use('/edit_profile', edit_profile);
 
+const lol = require('./routes/playground/lol');
+app.use('/lol', lol);
 
 const index = require('./routes/index');
 app.use('/', index);
+
 
 
 module.exports = app;

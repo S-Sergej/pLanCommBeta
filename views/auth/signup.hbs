@@ -1,6 +1,6 @@
 <div class="container">
   <div class="justify-content-center mt-5 row">
-    <form action="/auth/signup" method="post" class="text-center mb-4">
+    <form action="/auth/signup" method="post" class="text-center mb-4" enctype="multipart/form-data">
       <div class="form-group">
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" class="form-control" placeholder="Add your name" required>
@@ -10,10 +10,10 @@
         <input type="email" name="email" id="email" class="form-control" placeholder="Add your email" required>
       </div>
       
-      <div class="form-group">
+    
         <label for="avatarURL">Avatar:</label>
-        <input type="file" name="avatarURL" id="avatarURL" class="form-control" placeholder="Add your name" required>
-      </div>
+        <input type="file" name="avatarURL" class="form-control">
+    
 
       <div class="form-group">
         <label for="password">Password:</label>

@@ -3,8 +3,8 @@ const router  = express.Router();
 const LeagueJs = require('leaguejs/lib/LeagueJS.js');
 
 
-router.get('authorized_main', (req, res, next) =>{
-  res.render('auth/authorized_main');
+router.get('dev_playground', (req, res, next) =>{
+  res.render('authorized/dev_playground');
 })
 
 router.post('authorized_main', (req, res, next) =>{
@@ -14,11 +14,11 @@ router.post('authorized_main', (req, res, next) =>{
     .gettingByName(`${name}`)
     .then(data => {
         console.log("Name: ", data.name +"\n" + "Level: ", data.summonerLevel + "\n" + "AccountID: ", data.id);
-        res.render('auth/authorized_main', data);
+        res.render('authorized/dev_playground', data);
     })
     .catch(err => {
         console.log(err);
-        res.redirect('/');
+        res.redirect('/dev_playground');
     });
 })
 

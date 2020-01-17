@@ -3,7 +3,8 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const User = require("../models/User");
 const passport = require("passport");
-const uploadAvatarCloud = require('../config/cloudinary.js');
+const uploadAvatarCloud = require('../config/cloudinary');
+
 
 router.get("/signup", (req, res) => {
   res.render("auth/signup");
@@ -18,13 +19,12 @@ router.get("/login", (req, res) => {
   res.render("auth/login");
 });
 
-router.get("/authorized_main", loginCheck(), (req, res) => {
+router.get("/authorized_main",  loginCheck(), (req, res) => {
   const loggedUser = req.session.user;
   res.render("authorized/authorized_main");
 });
 
-
-router.post("/signup", uploadAvatarCloud.single('avatarURL'), (req, res, next) => {
+router.post("/signup", uploadAvatarCloud.single("avatarURL"), (req, res, next) => {
       const {
         username,
         email,
@@ -53,12 +53,13 @@ router.post("/signup", uploadAvatarCloud.single('avatarURL'), (req, res, next) =
                   username: username,
                   email: email,
                   password: hash,
-                  avatarURL: req.file.url
+                  avatarURL: req.file.url,
                 }))
                 .then(newUser => {
                   console.log(newUser);
+                
                   req.session.user = newUser; // add newUser to session
-                  res.redirect("auth/authorized_main");
+                  res.redirect("/auth/authorized_main");
                 });
             })
             .catch(err => next(err));

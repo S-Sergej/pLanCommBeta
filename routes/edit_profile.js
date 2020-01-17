@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user.js')
-const uploadCloud = require('../conf/cloudinary.js');
+const User = require('../models/User');
+const uploadAvatarCloud = require('../config/cloudinary');
 
 
 router.get('/authorized/profile_settings', (req, res, next) => {
@@ -12,7 +12,7 @@ router.get('/authorized/profile_settings', (req, res, next) => {
   .catch((error) => {console.log(error);});
 });
 
-router.post('/authorized/profile_settings', uploadCloud.single('avatar'),
+router.post('/authorized/profile_settings', uploadAvatarCloud.single('avatar'),
   (req, res, next) => {
     const avatarPath = req.file.url;
     const avatarName = req.file.originalname;
