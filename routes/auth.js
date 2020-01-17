@@ -23,12 +23,11 @@ router.get("/authorized_main", loginCheck(), (req, res) => {
 });
 
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", uploadAvatarCloud.single('avatarURL'), (req, res, next) => {
       const {
         username,
         email,
-        password,
-        avatarURL
+        password
       } = req.body;
       const passwordLength = 6;
 
@@ -53,7 +52,7 @@ router.post("/signup", (req, res, next) => {
                   username: username,
                   email: email,
                   password: hash,
-                  avatarURL: avatarURL
+                  avatarURL: req.file.url
                 }))
                 .then(newUser => {
                   console.log(newUser);
