@@ -27,7 +27,8 @@ router.post("/signup", (req, res, next) => {
       const {
         username,
         email,
-        password
+        password,
+        avatarURL
       } = req.body;
       const passwordLength = 6;
 
@@ -42,7 +43,7 @@ router.post("/signup", (req, res, next) => {
             .then(foundUser => {
               if (foundUser)
                 return res.render("auth/login", {
-                  message: `Username ${foundUser.username} is already exists, please login`
+                  message: `Username ${foundUser.username} already exists, please login`
                 });
 
               bcrypt
@@ -51,7 +52,8 @@ router.post("/signup", (req, res, next) => {
                 .then(hash => User.create({
                   username: username,
                   email: email,
-                  password: hash
+                  password: hash,
+                  avatarURL: avatarURL
                 }))
                 .then(newUser => {
                   console.log(newUser);
