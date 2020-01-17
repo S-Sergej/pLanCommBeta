@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const User = require("../models/User");
 const passport = require("passport");
+const uploadAvatarCloud = require('../config/cloudinary.js');
 
 router.get("/signup", (req, res) => {
   res.render("auth/signup");
