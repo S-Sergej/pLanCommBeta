@@ -95,8 +95,8 @@ passport.use(new GoogleStrategy(
           return done(null, user);
         
          }
-         User.create({ username: profile.displayName, email: profile._json.email, googleID: profile.id })
-           .then(newUser => {
+         User.create({ username: profile.displayName, email: profile._json.email, googleID: profile.id, avatarURL: profile.photos[0].value })           
+         .then(newUser => {
              console.log(newUser);
              return done(null, newUser);
 

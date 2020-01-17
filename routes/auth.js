@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const User = require("../models/User");
 const passport = require("passport");
+const uploadAvatarCloud = require('../config/cloudinary.js');
 
 router.get("/signup", (req, res) => {
   res.render("auth/signup");
@@ -23,7 +24,7 @@ router.get("/authorized_main", loginCheck(), (req, res) => {
 });
 
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", uploadAvatarCloud.single('avatarURL'), (req, res, next) => {
       const {
         username,
         email,
@@ -42,7 +43,7 @@ router.post("/signup", (req, res, next) => {
             .then(foundUser => {
               if (foundUser)
                 return res.render("auth/login", {
-                  message: `Username ${foundUser.username} is already exists, please login`
+                  message: `Username ${foundUser.username} already exists, please login`
                 });
 
               bcrypt
@@ -51,7 +52,8 @@ router.post("/signup", (req, res, next) => {
                 .then(hash => User.create({
                   username: username,
                   email: email,
-                  password: hash
+                  password: hash,
+                  avatarURL: req.file.url
                 }))
                 .then(newUser => {
                   console.log(newUser);
