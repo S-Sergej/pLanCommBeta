@@ -14,6 +14,8 @@ const User = require('./models/User');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
+
+
 mongoose
   .connect('mongodb://localhost/plancomm', {useNewUrlParser: true})
   .then(x => {
@@ -125,6 +127,9 @@ app.use('/lol', lol);
 
 const index = require('./routes/index');
 app.use('/', index);
+
+
+
 
 
 
