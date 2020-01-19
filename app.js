@@ -10,7 +10,7 @@ const logger       = require('morgan');
 const path         = require('path');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
-const User = require('./models/User');
+const User = require("../models/User");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
