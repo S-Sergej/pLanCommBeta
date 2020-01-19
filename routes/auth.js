@@ -21,10 +21,6 @@ router.get("/login", (req, res) => {
   res.render("auth/login");
 });
 
-router.get("/main",  loginCheck(), (req, res) => {
-  const loggedUser = req.session.user;
-  res.render("authorized/main");
-});
 
 router.get("/event_editor",  loginCheck(), (req, res) => {
   const loggedUser = req.session.user;
@@ -33,14 +29,13 @@ router.get("/event_editor",  loginCheck(), (req, res) => {
 
 
 router.post("/signup", uploadAvatarCloud.single("avatarURL"), (req, res, next) => {
-      const {
-        username,
-        email,
-        password
-      } = req.body;
-      const passwordLength = 6;
-
-      if (password.length < passwordLength)
+  const {
+    username,
+    email,
+    password
+  } = req.body;
+    const passwordLength = 6;
+    if (password.length < passwordLength)
         return res.render("auth/signup", {
           message: `Password length should be not less than ${passwordLength}`
         });
@@ -131,27 +126,28 @@ router.post("/signup", uploadAvatarCloud.single("avatarURL"), (req, res, next) =
 
 
 
-      router.get("/google", passport.authenticate("google", {
-        scope: [
-          "https://www.googleapis.com/auth/userinfo.profile",
-          "https://www.googleapis.com/auth/userinfo.email"
-        ]
-      }));
-      router.get("/google/callback", passport.authenticate("google", {
-        successRedirect: "/auth/main",
-        failureRedirect: "/" // here you would redirect to the login page using traditional login approach
-      }));
-    
-      router.get("/main", (req, res, next) => {
-        const loggedIn = req.session.user;
-        Event.find()
-        .then(Rooms => {
+router.get("/google", passport.authenticate("google", {
+  scope: [
+  "https://www.googleapis.com/auth/userinfo.profile",
+  "https://www.googleapis.com/auth/userinfo.email"
+  ]
+}));
       
-            res.render('main', {event: Rooms});
-        })
-        .catch(error => {next(error)}
-        );
-      });
+router.get("/google/callback", passport.authenticate("google", {
+  successRedirect: "/auth/main",
+  failureRedirect: "/" // here you would redirect to the login page using traditional login approach
+}));
+    
+router.get("/main", loginCheck(), (req, res, next) => {
+  const loggedIn = req.session.user;
+  Event.find().populate()
+  .then(allEvents => {
+      res.render('authorized/main', {events: allEvents});
+  })
+  .catch(error => {next(error)}
+  );
+});
 
 
-      module.exports = router;
+
+module.exports = router;
