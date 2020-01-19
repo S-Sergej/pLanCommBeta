@@ -1,1 +1,24 @@
 <h1>Event Editor</h1>
+
+<div class="container">
+  <div class="justify-content-center mt-5 row">
+    <form action="/auth/event_editor" method="post" class="text-center mb-4">
+      <div class="form-group">
+        <label for="eventname">Eventname:</label>
+        <input type="text" name="eventname" id="eventname" class="form-control" placeholder="Event´s name" required>
+      </div>
+      <div class="form-group">
+        <label for="eventdate">Eventdate:</label>
+        <input type="date" name="eventdate" id="eventdate" class="form-control" placeholder="Time of event" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Create event</button><br><br>
+      {{#if message}}
+      <p class=" err-message">{{message}}</p>
+      {{/if}}
+    </form>
+    <div class="col-12 text-center">
+      <p><a href="/">back to Home</a></p>
+    </div>
+  </div>
+</div>
+

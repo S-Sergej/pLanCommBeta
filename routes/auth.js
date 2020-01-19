@@ -4,6 +4,8 @@ const router = express.Router();
 const User = require("../models/user");
 const passport = require("passport");
 const uploadAvatarCloud = require('../config/cloudinary');
+const Event = require("../models/Event");
+
 
 
 router.get("/signup", (req, res) => {
@@ -19,10 +21,16 @@ router.get("/login", (req, res) => {
   res.render("auth/login");
 });
 
-router.get("/authorized_main",  loginCheck(), (req, res) => {
+router.get("/main",  loginCheck(), (req, res) => {
   const loggedUser = req.session.user;
-  res.render("authorized/authorized_main");
+  res.render("authorized/main");
 });
+
+router.get("/event_editor",  loginCheck(), (req, res) => {
+  const loggedUser = req.session.user;
+  res.render("authorized/event_editor");
+});
+
 
 router.post("/signup", uploadAvatarCloud.single("avatarURL"), (req, res, next) => {
       const {
@@ -59,7 +67,7 @@ router.post("/signup", uploadAvatarCloud.single("avatarURL"), (req, res, next) =
                   console.log(newUser);
                 
                   req.session.user = newUser; // add newUser to session
-                  res.redirect("/auth/authorized_main");
+                  res.redirect("/auth/main");
                 });
             })
             .catch(err => next(err));
@@ -80,7 +88,7 @@ router.post("/signup", uploadAvatarCloud.single("avatarURL"), (req, res, next) =
                 }); 
 
               req.session.user = foundUser;
-              res.redirect("/auth/authorized_main");
+              res.redirect("/auth/main");
             });
           })
           .catch(err => next(err));
@@ -97,6 +105,30 @@ router.post("/signup", uploadAvatarCloud.single("avatarURL"), (req, res, next) =
         });
       });
 
+      /*router.post("/event_editor"), (req, res, next) => {
+        const {eventname, eventdate} = req.body;
+        if (eventname.length < 6)
+        return res.render ("authorized/event_editor", {
+          message : "Invaldid eventname, please use at least 6 credentials"
+        }).then(newEvent => {
+        console.log(newEvent);
+        res.redirect("/authorized/main");
+      })
+      .catch(err => next(err));
+      }; */
+
+      router.post('/event_editor', (req, res) => {
+        const {eventname, eventdate} = req.body;
+        const owner = req.session.user;
+        Event.create({ eventname, eventdate, owner }).then(() => {
+            res.redirect('/auth/main')
+        })
+            .catch(err => {
+                next(err);
+            });
+    });
+
+
 
 
       router.get("/google", passport.authenticate("google", {
@@ -106,9 +138,20 @@ router.post("/signup", uploadAvatarCloud.single("avatarURL"), (req, res, next) =
         ]
       }));
       router.get("/google/callback", passport.authenticate("google", {
-        successRedirect: "/auth/authorized_main",
+        successRedirect: "/auth/main",
         failureRedirect: "/" // here you would redirect to the login page using traditional login approach
       }));
     
+      router.get("/main", (req, res, next) => {
+        const loggedIn = req.session.user;
+        Event.find()
+        .then(Rooms => {
+      
+            res.render('main', {event: Rooms});
+        })
+        .catch(error => {next(error)}
+        );
+      });
+
 
       module.exports = router;

@@ -1,1 +1,13 @@
 <h1>authorized Main Page</h1>
+
+<h3>Your account:</h3>
+
+<h3 style="color:aqua"><p><a href="/auth/event_editor">Create an event</a></p></h3>
+
+<h2>Events</h2>
+{{#each events}}
+ <h2>Eventname: {{this.eventname}}</h2>
+ <h2>Eventdate: {{this.eventdate}}</h2>
+ 
+ {{/each}}
+
