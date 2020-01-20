@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require("../models/user");
-const uploadAvatarCloud = require('../config/cloudinary');
+const User = require("../../models/user");
+const uploadAvatarCloud = require('../../config/cloudinary');
 
 
 router.get('/authorized/user_editor', (req, res, next) => {
@@ -24,6 +24,7 @@ router.post('/authorized/user_editor', uploadAvatarCloud.single('avatar'),
         console.log(error);
       });
   });
+
 
 
 module.exports = router;

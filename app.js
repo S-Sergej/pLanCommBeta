@@ -83,7 +83,7 @@ passport.use(new GoogleStrategy(
   {
     clientID:     process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "/login/google/callback"
   },
 
   (accessToken, refreshToken, profile, done) => {
@@ -116,21 +116,43 @@ passport.use(new GoogleStrategy(
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
-const auth = require('./routes/auth');
-app.use('/auth', auth);
+//authorization
+const login = require('./routes/auth/login');
+app.use('/login', login);
 
-const edit_profile = require('./routes/edit_profile');
-app.use('/edit_profile', edit_profile);
+const signup = require('./routes/auth/signup');
+app.use('/signup', signup);
 
+const logout = require('./routes/auth/logout');
+app.use('/logout', logout);
+
+
+//private routing
+const main_private = require('./routes/private/main_private');
+app.use('/main', main_private);
+/*
+const event_creator = require('./routes/private/event_creator');
+app.use('/private/event_creator', event_creator);
+
+const event_details = require('./routes/private/event_details');
+app.use('/private/event_details', event_details);
+
+const player_editor = require('./routes/private/player_editor');
+app.use('/private/player_editor', player_editor);
+
+const player_details = require('./routes/private/player_details');
+app.use('/private/player_details', player_details);
+
+//dev playground
 const lol = require('./routes/playground/lol');
 app.use('/lol', lol);
 
+//app.get('/test-route', (req, res, next) => res.send('<a href="#">You are inside /test-route</a>'))
+
+*/
+//main unauthorized
 const index = require('./routes/index');
 app.use('/', index);
-
-
-
-
 
 
 module.exports = app;

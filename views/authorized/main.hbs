@@ -1,7 +1,13 @@
 <h1>authorized Main Page</h1>
 
-<h3>Your account:</h3>
+<h3>Logged in as: {{req.session.user}}</h3>
 
+<form action="/logout" method="get" class="text-center mb-4">
+<button type="submit">LOGOUT</button><br>
+</form>
+<p><a href="/signup">SIGN UP</a></p>
+<a href="/login">LOGIN</a>
+<!--
 <h3 style="color:aqua"><p><a href="/auth/event_editor">Create an event</a></p></h3>
 
 <h2>Events</h2>
@@ -9,5 +15,14 @@
 {{#each events}}
  <h2>Eventname: {{this.eventname}}</h2>
  <h2>Eventdate: {{this.eventdate}}</h2>
+ <h4>Owner: {{this._id}}</h4>
 {{/each}}
 
+
+<h2>Player List</h2>
+{{#each users}}
+ <h2>Username: {{this.username}}</h2>
+ <p><img src="{{this.avatarURL}}" width="100" height="auto" alt="no Picture found"></p>
+ 
+ {{/each}}
+ -->
