@@ -1,14 +1,9 @@
 <h2>Account Editor</h2>
 
-<form action="/authorized/profile_settings?user_id={{user._id}}" method="post" enctype="multipart/form-data">
-  <div>
-    <label>Avatar</label>
-    <input type="text" name="title" />
-  </div>
-  <div>
-    <label>Description</label>
-    <input type="text" name="description"/>
-  </div>
+<h3>User to edit: {{username}}</h3>
+
+
+<form action="/authorized/user_editor?user_id={{user._id}}" method="post" enctype="multipart/form-data">
   <div>
     <label>Avatar</label>
     <input type="file" name="avatar" />

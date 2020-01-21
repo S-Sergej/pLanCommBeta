@@ -4,13 +4,22 @@ const User = require("../../models/user");
 const uploadAvatarCloud = require('../../config/cloudinary');
 
 
-router.get('/authorized/user_editor', (req, res, next) => {
+/*router.get('/', (req, res, next) => {
   User.findOne({ _id: req.query.user_id })
   .then((user) =>{
-    res.render('user_editor', {user});
+    res.render('authorized/user_editor', {user});
   })
   .catch((error) => {console.log(error);});
+}); */
+
+router.get('/', (req, res) => {
+  if(req.session.user) {
+    res.render('authorized/user_editor', {username: req.session.user.username});
+  } else {
+    res.redirect('/login');
+  }
 });
+
 
 router.post('/authorized/user_editor', uploadAvatarCloud.single('avatar'),
   (req, res, next) => {
@@ -18,7 +27,7 @@ router.post('/authorized/user_editor', uploadAvatarCloud.single('avatar'),
     const avatarName = req.file.originalname;
     User.update({ _id: req.query.user_id }, {avatarPath, avatarName})
       .then(user => {
-        res.redirect('auth/main');
+        res.redirect('authorized/main');
       })
       .catch(error => {
         console.log(error);

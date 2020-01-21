@@ -17,7 +17,7 @@ const MongoStore = require("connect-mongo")(session);
 
 
 mongoose
-  .connect(process.env.MONGOLAB_URI, {useNewUrlParser: true})
+  .connect('mongodb://localhost/plancomm', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -136,13 +136,14 @@ app.use('/private/event_creator', event_creator);
 
 const event_details = require('./routes/private/event_details');
 app.use('/private/event_details', event_details);
-
+*/
 const player_editor = require('./routes/private/player_editor');
-app.use('/private/player_editor', player_editor);
+app.use('/user_editor', player_editor);
 
 const player_details = require('./routes/private/player_details');
-app.use('/private/player_details', player_details);
+app.use('/user_details', player_details);
 
+/*
 //dev playground
 const lol = require('./routes/playground/lol');
 app.use('/lol', lol);
