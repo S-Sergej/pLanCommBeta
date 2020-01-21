@@ -143,11 +143,11 @@ app.use('/user_editor', player_editor);
 const player_details = require('./routes/private/player_details');
 app.use('/user_details', player_details);
 
-/*
+
 //dev playground
 const lol = require('./routes/playground/lol');
 app.use('/lol', lol);
-
+/*
 //app.get('/test-route', (req, res, next) => res.send('<a href="#">You are inside /test-route</a>'))
 
 */
