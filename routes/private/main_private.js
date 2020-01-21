@@ -7,15 +7,14 @@ const Event = require('../../models/Event')
 router.get('/', (req, res) => {
   if(req.session.user) {
     const ownername = req.session.user.username;
-    //console.log(User.findById().populate());
     Event.find().populate()
     .then(allEvents => {
       User.find()
       .then(Gamers => {
-      res.render('authorized/main', {events: allEvents, username: ownername, users:Gamers});
+      res.status(200).render('authorized/main', {events: allEvents, username: ownername, users:Gamers});
     })});
   } else {
-    res.redirect('/login');
+    res.status(402).redirect('/login');
   }
 });
 /*

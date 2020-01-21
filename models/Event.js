@@ -6,7 +6,8 @@ const eventSchema = new Schema({
   eventname: String,
   eventdate: Date,
   ownerid: {type: Schema.Types.ObjectId, ref: "User"},
-  ownername: String
+  ownername: String,
+  subscribers: [{type: Schema.Types.ObjectId, ref: "User"}]
 },
   {
     timestamps: true

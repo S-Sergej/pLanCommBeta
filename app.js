@@ -39,7 +39,7 @@ app.use(cookieParser());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    cookie: { maxAge: 24 * 60 * 60 },
+    cookie: { maxAge: (24 * 60 * 60 * 1000) },
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
@@ -92,14 +92,12 @@ passport.use(new GoogleStrategy(
 
      User.findOne({ googleID: profile.id })
        .then(user => {
-         console.log("User from database: ", user);
          if (user) {
           return done(null, user);
         
          }
          User.create({ username: profile.displayName, email: profile._json.email, googleID: profile.id, avatarURL: profile.photos[0].value })           
          .then(newUser => {
-             console.log(newUser);
              return done(null, newUser);
 
            })

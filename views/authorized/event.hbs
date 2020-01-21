@@ -3,3 +3,20 @@
 <p>Scheduled for: {{event.eventdate}}</p>
 <p>created by: {{event.ownername}}</p>
 
+<p>Subscriber: </p>
+{{#each event.subscribers}}
+<p>{{this.username}}</p>
+{{/each}}
+
+<form action="/event/{{event._id}}/subscribe" method="post">
+<button type="submit">subscribe</button>
+</form>
+
+
+<form action="/event/{{event._id}}/unsubscribe" method="post">
+<button type="submit">unsubscribe</button>
+</form>
+
+<form action="/event/{{event._id}}/delete" method="post">
+<button type="submit">delete</button>
+</form>
