@@ -2,13 +2,7 @@
 
 <h3>Logged in as: {{username}}</h3>
 
-<form action="/logout" method="get" class="text-center mb-4">
-<button type="submit">LOGOUT</button><br>
-</form>
-<p><a href="/signup">SIGN UP</a></p>
-<a href="/login">LOGIN</a>
-<!--
-<h3 style="color:aqua"><p><a href="/auth/event_editor">Create an event</a></p></h3>
+<h3 style="color:aqua"><p><a href="/event_create">Create an event</a></p></h3>
 
 <h2>Events</h2>
 
@@ -23,6 +17,9 @@
 {{#each users}}
  <h2>Username: {{this.username}}</h2>
  <p><img src="{{this.avatarURL}}" width="100" height="auto" alt="no Picture found"></p>
- 
  {{/each}}
- -->
+
+
+<form action="/logout" method="get" class="text-center mb-4">
+<button type="submit">LOGOUT</button><br>
+</form>

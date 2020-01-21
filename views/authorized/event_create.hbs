@@ -1,15 +1,15 @@
-<h1>Event Editor</h1>
+<h1>Event Creator</h1>
 
 <div class="container">
   <div class="justify-content-center mt-5 row">
-    <form action="/auth/event_editor" method="post" class="text-center mb-4">
+    <form action="/event_create" method="post" class="text-center mb-4">
       <div class="form-group">
-        <label for="eventname">Eventname:</label>
-        <input type="text" name="eventname" id="eventname" class="form-control" placeholder="Event´s name" required>
+        <label for="eventname">Event Name:</label>
+        <input type="text" name="eventname" id="eventname" class="form-control" placeholder="type the Name here" required>
       </div>
       <div class="form-group">
-        <label for="eventdate">Eventdate:</label>
-        <input type="date" name="eventdate" id="eventdate" class="form-control" placeholder="Time of event" required>
+        <label for="eventdate">Schedule:</label>
+        <input type="date" name="eventdate" id="eventdate" class="form-control" placeholder="Time of the Event" required>
       </div>
       <button type="submit" class="btn btn-primary">Create event</button><br><br>
       {{#if message}}
