@@ -19,7 +19,7 @@ router.post('/', (req, res, next) =>{
     })
     .catch(err => {
         console.log(err);
-        res.redirect('/dev_playground');
+        res.redirect('/lol');
     });
 })
 
