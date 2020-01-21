@@ -130,10 +130,10 @@ app.use('/logout', logout);
 //private routing
 const main_private = require('./routes/private/main_private');
 app.use('/main', main_private);
-/*
-const event_creator = require('./routes/private/event_creator');
-app.use('/private/event_creator', event_creator);
 
+const event_creator = require('./routes/private/event_creator');
+app.use('/event_create', event_creator);
+/*
 const event_details = require('./routes/private/event_details');
 app.use('/private/event_details', event_details);
 */

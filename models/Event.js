@@ -5,8 +5,9 @@ const User = require("../models/user");
 const eventSchema = new Schema({
   eventname: String,
   eventdate: Date,
-  owner: {type: Schema.Types.ObjectId, ref: "User"}
-  },
+  ownerid: {type: Schema.Types.ObjectId, ref: "User"},
+  ownername: String
+},
   {
     timestamps: true
   }
