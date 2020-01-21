@@ -1,9 +1,9 @@
 <h2>Account Editor</h2>
 
-<h3>User to edit: {{username}}</h3>
+<h3>User to edit: {{user.username}}</h3>
 
 
-<form action="/authorized/user_editor?user_id={{user._id}}" method="post" enctype="multipart/form-data">
+<form action="/user_editor?user_id={{user._id}}" method="post" enctype="multipart/form-data">
   <div>
     <label>Avatar</label>
     <input type="file" name="avatar" />

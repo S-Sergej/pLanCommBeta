@@ -14,25 +14,26 @@ const uploadAvatarCloud = require('../../config/cloudinary');
 
 router.get('/', (req, res) => {
   if(req.session.user) {
-    res.render('authorized/user_editor', {username: req.session.user.username});
+    res.render('authorized/user_editor', {user: req.session.user});
   } else {
     res.redirect('/login');
   }
 });
 
 
-router.post('/authorized/user_editor', uploadAvatarCloud.single('avatar'),
+router.post('/', uploadAvatarCloud.single('avatar'),
   (req, res, next) => {
-    const avatarPath = req.file.url;
-    const avatarName = req.file.originalname;
-    User.update({ _id: req.query.user_id }, {avatarPath, avatarName})
+    const avatarURL = req.file.url;
+    //const avatarName = req.file.originalname;
+    User.findOneAndUpdate({ _id: req.query.user_id }, {avatarURL})
       .then(user => {
-        res.redirect('authorized/main');
+        res.redirect('/main');
       })
       .catch(error => {
         console.log(error);
       });
-  });
+      
+  }); 
 
 
 
