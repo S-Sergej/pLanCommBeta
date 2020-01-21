@@ -133,10 +133,10 @@ app.use('/main', main_private);
 
 const event_creator = require('./routes/private/event_creator');
 app.use('/event_create', event_creator);
-/*
+
 const event_details = require('./routes/private/event_details');
-app.use('/private/event_details', event_details);
-*/
+app.use('/event', event_details);
+
 const player_editor = require('./routes/private/player_editor');
 app.use('/user_editor', player_editor);
 

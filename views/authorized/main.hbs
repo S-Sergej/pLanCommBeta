@@ -8,16 +8,16 @@
 <h2>Events</h2>
 
 {{#each events}}
- <h2>Eventname: {{this.eventname}}</h2>
+<h1><a href="/event/{{this._id}}">{{this.eventname}}<a></h1>
  <h2>Eventdate: {{this.eventdate}}</h2>
  <h4>Owner: {{this.ownername}}</h4>
 {{/each}}
 
 
-<h2>Player List</h2>
+<h2>Player List:</h2>
 {{#each users}}
- <h2>Username: {{this.username}}</h2>
- <p><img src="{{this.avatarURL}}" width="100" height="auto" alt="no Picture found"></p>
+ <h3>{{this.username}}</h3>
+ <p><img src="{{this.avatarURL}}" width="70" height="auto" alt="no Picture found"></p>
  {{/each}}
 
 
