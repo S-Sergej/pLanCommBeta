@@ -6,11 +6,11 @@ const Event = require('../../models/Event')
 
 router.get('/', (req, res) => {
   if(req.session.user) {
-    const owner = req.session.user._id;
-    console.log(owner);
-    Event.find().populate('owner')
+    const ownername = req.session.user.username;
+    console.log(User.findById().populate());
+    Event.find().populate()
     .then(allEvents => {
-      res.render('authorized/main', {events: allEvents, username: req.session.user.username});
+      res.render('authorized/main', {events: allEvents, username: ownername});
     })
   } else {
     res.redirect('/login');

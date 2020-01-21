@@ -19,9 +19,10 @@ router.post('/', (req, res) => {
   }
   const { eventname, eventdate} = req.body;
   console.log(req.session.user);
-  const owner = req.session.user._id;
-  console.log(owner);
-  Event.create({eventname, eventdate, owner})
+  const ownerid = req.session.user._id;
+  const ownername = req.session.user.username;
+  console.log(ownername);
+  Event.create({eventname, eventdate, ownerid, ownername})
     .then(() => {
       res.redirect('/main')
     })
