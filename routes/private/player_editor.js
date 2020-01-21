@@ -14,7 +14,7 @@ const uploadAvatarCloud = require('../../config/cloudinary');
 
 router.get('/', (req, res) => {
   if(req.session.user) {
-    res.render('authorized/user_editor', {user: req.session.user});
+    res.render('authorized/user_editor', {user: req.session.user, routeString: req.baseUrl});
   } else {
     res.redirect('/login');
   }

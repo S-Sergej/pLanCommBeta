@@ -14,10 +14,13 @@ const User = require('./models/user');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
-
+hbs.registerHelper('displayLoginBar',
+  (currentRoute, allowedRoutes) =>
+      allowedRoutes.split(' ').some(allowedRoute => currentRoute.includes(allowedRoute))
+);
 
 mongoose
-  .connect('mongodb://localhost/plancomm', {useNewUrlParser: true})
+  .connect(process.env.MONGOLAB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

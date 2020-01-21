@@ -6,7 +6,7 @@ const User = require('../../models/user');
 
 router.get('/', (req, res) => {
   if(req.session.user){
-  res.render('authorized/event_create')
+  res.render('authorized/event_create', {user : req.session.user, routeString: req.baseUrl})
 } else {
   res.redirect('/login');
   }
@@ -18,10 +18,8 @@ router.post('/', (req, res) => {
     return res.render('auth/login', {message: 'Session is no longer valid. Please re-login'})
   }
   const { eventname, eventdate} = req.body;
-  console.log(req.session.user);
   const ownerid = req.session.user._id;
   const ownername = req.session.user.username;
-  console.log(ownername);
   Event.create({eventname, eventdate, ownerid, ownername})
     .then(() => {
       res.redirect('/main')

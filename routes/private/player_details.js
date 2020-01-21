@@ -12,7 +12,7 @@ const User = require("../../models/user");
 router.get("/", (req, res, next) => {
   User.find()
   .then(Gamers => {
-  res.render('authorized/user_details', {users: Gamers});
+  res.render('authorized/user_details', {users: Gamers, user: req.session.user, routeString: req.baseUrl});
   })
   .catch(error => {next(error)}
   );
