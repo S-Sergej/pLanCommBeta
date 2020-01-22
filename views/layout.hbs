@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
+  {{#if (displayLoginBar routeString '/main /event /user') }}
+    <h3>Logged in as: {{user.username}}</h3>
+<form action="/logout" method="get" class="text-center mb-4">
+<button type="submit">LOGOUT</button><br>
+</form>
+<h3 style="color:aqua"><p><a href="/user_editor">Go to user editor</a></p></h3>
+  {{/if}}
 
   {{{body}}}
 
@@ -16,3 +23,5 @@
   <script src="/javascripts/script.js"></script>
 </body>
 </html>
+
+

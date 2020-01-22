@@ -5,8 +5,9 @@ const User = require('../../models/user')
 const passport = require('passport')
 
 router.get('/', (req, res) => {
-  res.render('auth/login')
-})
+  res.render('auth/login', {routeString: req.baseUrl})
+});
+
 
 router.post('/', (req, res, next) => {
   const { email, password } = req.body

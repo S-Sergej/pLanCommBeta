@@ -14,7 +14,10 @@ const User = require('./models/user');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
-
+hbs.registerHelper('displayLoginBar',
+  (currentRoute, allowedRoutes) =>
+      allowedRoutes.split(' ').some(allowedRoute => currentRoute.includes(allowedRoute))
+);
 
 mongoose
   .connect(process.env.MONGOLAB_URI, {useNewUrlParser: true})

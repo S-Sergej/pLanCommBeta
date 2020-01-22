@@ -6,7 +6,7 @@ const User = require('../../models/user');
 
 router.get('/', (req, res) => {
   if(req.session.user){
-  res.render('authorized/event_create')
+  res.render('authorized/event_create', {user : req.session.user, routeString: req.baseUrl})
 } else {
   res.redirect('/login');
   }
@@ -21,7 +21,7 @@ router.post('/', (req, res, n) => {
   const ownerid = req.session.user._id;
   const ownername = req.session.user.username;
   const subscribers = [ownerid];
-
+  
   Event.create({eventname, eventdate, ownerid, ownername, subscribers})
     .then(() => {
       res.redirect('/main')
