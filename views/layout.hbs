@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
+  <div class="user-hub"> 
   {{#if (displayLoginBar routeString '/main /event /user') }}
     <h3>Logged in as: {{loginUser.username}}</h3>
 <form action="/logout" method="get" class="text-center mb-4">
@@ -15,7 +16,7 @@
 </form>
 <h3 style="color:aqua"><p><a href="/user_editor/{{loginUser}}">Edit Profile</a></p></h3>
   {{/if}}
-
+</div>
   {{{body}}}
 
   
