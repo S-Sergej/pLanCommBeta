@@ -97,7 +97,6 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  margin: 10px 5% 0 5%; }
+  flex-direction: row; }
 
 /*# sourceMappingURL=style.css.map */

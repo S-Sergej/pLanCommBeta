@@ -1,8 +1,8 @@
-<div class="text">
+
 <nav class="nav-bar">
   <ul class="nav-bar-ul">
     <li><a href='/event_create'>Create an Event</a></li><br>
-  <li><h2>Player List</h2>
+  <div class="text"><li><h2>Player List</h2></div>
 {{#each users}}
  <h2><a href="/user_details/{{this._id}}">{{this.username}}</a></h2>
  <p><img src="{{this.avatarURL}}" width="70" height="auto" alt="no Picture found"></p>
@@ -18,5 +18,4 @@
  <h4>Creator: {{this.ownername}}</h4>
  </div>
 {{/each}}
-</div>
 </div>
