@@ -1,8 +1,4 @@
 <h2>Account Editor</h2>
-
-<h3>User to edit: {{user.username}}</h3>
-
-
 <form action="/user_editor?user_id={{user._id}}" method="post" enctype="multipart/form-data">
   <div>
     <label>Avatar</label>
@@ -12,3 +8,7 @@
     <button type="submit">SAVE</button>
   </div>
 </form>
+
+<div class="col-12 text-center">
+  <p><a href="/main">Back to Mainpage</a></p>
+</div>

@@ -1,9 +1,11 @@
-<h2>This is the site for user details</h2>
+<h2>User Details</h2>
 
 <!--<h3>Logged in user: {{username}}</h3> -->
 
-{{#each users}}
- <h2>Username: {{this.username}}</h2>
- <p><img src="{{this.avatarURL}}" width="100" height="auto" alt="no Picture found"></p>
+ <h2>{{user.username}}</h2>
+ <p><img src="{{user.avatarURL}}" width="400" height="auto" alt="no Picture found"></p>
+ <h3>Email: {{user.email}}</h3>
 
- {{/each}}
+<div class="col-12 text-center">
+  <p><a href="/main">Back to Mainpage</a></p>
+</div>

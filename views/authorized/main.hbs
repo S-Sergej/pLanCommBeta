@@ -1,6 +1,5 @@
 <h1>authorized Main Page</h1>
 
-<h3>Logged in as: {{username}}</h3>
 <!--<h3 style="color:aqua"><p><a href="/user_editor">Go to user editor</a></p></h3>-->
 
 <h3 style="color:aqua"><p><a href="/event_create">Create an event</a></p></h3>
@@ -8,25 +7,18 @@
 <ul>
   <li><h2>Player List</h2>
 {{#each users}}
- <h2>Username: {{this.username}}</h2>
- <p><img src="{{this.avatarURL}}" width="100" height="auto" alt="no Picture found"></p>
+ <h2>Username: <a href="/user_details/{{this._id}}">{{this.username}}</a></h2>
+ <p><img src="{{this.avatarURL}}" width="70" height="auto" alt="no Picture found"></p>
  {{/each}}</li>
 </ul>
 
 <h2>Events</h2>
 
 {{#each events}}
-<h1><a href="/event/{{this._id}}">{{this.eventname}}<a></h1>
+<h1><a href="/event/{{this._id}}">{{this.eventname}}</a></h1>
  <h2>Eventdate: {{this.eventdate}}</h2>
  <h4>Creator: {{this.ownername}}</h4>
 {{/each}}
-
-
-<h2>Player List:</h2>
-{{#each users}}
- <h3>{{this.username}}</h3>
- <p><img src="{{this.avatarURL}}" width="70" height="auto" alt="no Picture found"></p>
- {{/each}}
 
 
 <!--<form action="/logout" method="get" class="text-center mb-4">

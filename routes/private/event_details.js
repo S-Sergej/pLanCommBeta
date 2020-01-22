@@ -8,7 +8,7 @@ router.get('/:id', (req, res, next) => {
   Event.findOne({ _id: req.params.id })
     .populate('subscribers')
     .then(theEvent => {
-      res.render('authorized/event', { event: theEvent })
+      res.render('authorized/event', { event: theEvent, routeString: req.baseUrl})
     })
     .catch(error => {
       next(error)

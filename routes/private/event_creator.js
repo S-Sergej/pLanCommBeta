@@ -6,7 +6,7 @@ const User = require('../../models/user');
 
 router.get('/', (req, res) => {
   if(req.session.user){
-  res.render('authorized/event_create', {user : req.session.user, routeString: req.baseUrl})
+  res.render('authorized/event_create', {loginUser: req.session.user, routeString: req.baseUrl})
 } else {
   res.redirect('/login');
   }

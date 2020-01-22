@@ -15,9 +15,18 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
 hbs.registerHelper('displayLoginBar',
-  (currentRoute, allowedRoutes) =>
-      allowedRoutes.split(' ').some(allowedRoute => currentRoute.includes(allowedRoute))
-);
+  (currentRoute, allowedRoutes) => {
+    //return true;
+    console.log(">>>>>>>>>>>>>>>>", currentRoute, allowedRoutes.split(' '))
+      const result = allowedRoutes.split(' ')
+      .some(route => {
+        const testLogic = currentRoute.includes(route);
+        console.log('testLogic', testLogic);
+        return testLogic
+      });
+      console.log(result);
+      return result;
+    });
 
 mongoose
   .connect(process.env.MONGOLAB_URI, {useNewUrlParser: true})

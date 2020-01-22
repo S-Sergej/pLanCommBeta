@@ -9,10 +9,11 @@ const User = require("../../models/user");
     res.redirect('/login');
   }
 }); */
-router.get("/", (req, res, next) => {
-  User.find()
-  .then(Gamers => {
-  res.render('authorized/user_details', {users: Gamers, user: req.session.user, routeString: req.baseUrl});
+router.get("/:id", (req, res, next) => {
+  User.findOne({_id: req.params.id})
+  .then(Gamer => {
+    console.log("HERE WE GOOOOOOOOOOOO", Gamer)
+  res.render('authorized/user_details', {user: Gamer, loginUser: req.session.user, routeString: req.baseUrl});
   })
   .catch(error => {next(error)}
   );

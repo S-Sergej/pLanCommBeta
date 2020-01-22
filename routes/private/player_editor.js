@@ -3,36 +3,24 @@ const router = express.Router();
 const User = require("../../models/user");
 const uploadAvatarCloud = require('../../config/cloudinary');
 
-
-/*router.get('/', (req, res, next) => {
-  User.findOne({ _id: req.query.user_id })
-  .then((user) =>{
-    res.render('authorized/user_editor', {user});
+router.get('/:id', (req, res) => {
+  User.findOne({_id: req.session.user})
+  .then(theUser => {
+  res.render('authorized/user_editor', {user: theUser, loginUser: req.session.user, routeString: req.baseUrl});
   })
-  .catch((error) => {console.log(error);});
-}); */
-
-router.get('/', (req, res) => {
-  if(req.session.user) {
-    res.render('authorized/user_editor', {user: req.session.user, routeString: req.baseUrl});
-  } else {
-    res.redirect('/login');
-  }
 });
 
 
 router.post('/', uploadAvatarCloud.single('avatar'),
   (req, res, next) => {
     const avatarURL = req.file.url;
-    //const avatarName = req.file.originalname;
-    User.findOneAndUpdate({ _id: req.query.user_id }, {avatarURL})
+    User.findOneAndUpdate({ _id: req.session.user }, {avatarURL})
       .then(user => {
         res.redirect('/main');
       })
       .catch(error => {
         console.log(error);
       });
-      
   }); 
 
 
