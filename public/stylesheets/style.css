@@ -1,8 +1,101 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: black; }
 
 a {
   color: #00B7FF; }
+
+.index {
+  background-color: black;
+  background-image: url("https://res.cloudinary.com/ironhackcamp/image/upload/v1579561986/codesource/header_pic_wosn8d.jpg");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  padding-top: 50px;
+  position: relative; }
+
+.login-box {
+  font-size: 1.7em;
+  text-align: center;
+  border: 2px solid #eee;
+  border-radius: 20px;
+  border-sizing: border-box;
+  box-shadow: 2px 2px 10px 0 #eee;
+  margin: 30px 5% 0 5%;
+  padding: 20px;
+  width: 40%; }
+
+.form-group {
+  font-size: 30px;
+  color: #06bf0a;
+  text-align: center; }
+
+span {
+  color: #06bf0a; }
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px; }
+
+#input-style-google {
+  font-size: 20px;
+  width: 20%;
+  height: auto;
+  font: 20px, "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+#btn-primary {
+  margin: 30px 5% 0 5%;
+  background-color: #06bf0a;
+  font-size: 20px;
+  width: 20%;
+  height: auto; }
+
+.events {
+  background-color: #06bf0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 1.7em;
+  border: 2px solid #eee;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px 0 #eee;
+  margin: 30px 5% 0 5%;
+  padding: 20px; }
+
+.events-container {
+  width: 70vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center; }
+
+/*
+.nav-bar{
+  padding: 14px 14px;
+  background-color: rgb(25, 33, 41);
+  color: white;
+}*/
+.nav-bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  background-color: black;
+  height: 100%;
+  position: fixed;
+  overflow: auto; }
+
+.text {
+  color: #06bf0a; }
+
+.user-hub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; }
 
 /*# sourceMappingURL=style.css.map */

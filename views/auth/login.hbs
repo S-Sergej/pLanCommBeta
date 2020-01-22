@@ -1,4 +1,9 @@
-<div class="container">
+<header>
+    <div class="index"></div>
+</header>
+<body>
+  <div class="login-container">
+<div class="login-box">
   <div class="justify-content-center mt-5 row">
     <form action="/login" method="post" class="text-center mb-4">
       <div class="form-group">
@@ -9,12 +14,12 @@
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" class="form-control" placeholder="your Password" required>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button><br><br>
+      <button type="submit" id="btn-primary">Login</button><br><br>
       {{#if message}}
       <p class=" err-message">{{message}}</p>
       {{/if}}
       <br>
-      <span>dont have an Account now? <a href="/signup">Signup</a> for free and join the rooms</span><br>
+      <span>dont have an Account now? <a href="/signup"><br>Signup</a> for free</span><br><br>
       <span>Or login with
       <button id="input-style-google"><a href="/login/google">Google</a></button></span>
 
@@ -24,3 +29,5 @@
     </div>
   </div>
 </div>
+</div>
+</body>

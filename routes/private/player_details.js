@@ -12,7 +12,6 @@ const User = require("../../models/user");
 router.get("/:id", (req, res, next) => {
   User.findOne({_id: req.params.id})
   .then(Gamer => {
-    console.log("HERE WE GOOOOOOOOOOOO", Gamer)
   res.render('authorized/user_details', {user: Gamer, loginUser: req.session.user, routeString: req.baseUrl});
   })
   .catch(error => {next(error)}

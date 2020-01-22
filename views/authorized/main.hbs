@@ -1,27 +1,22 @@
-<h1>authorized Main Page</h1>
-
-<!--<h3 style="color:aqua"><p><a href="/user_editor">Go to user editor</a></p></h3>-->
-
-<h3 style="color:aqua"><p><a href="/event_create">Create an event</a></p></h3>
-
-<ul>
+<div class="all-together">
+<nav class="nav-bar">
+  <ul class="nav-bar-ul">
+    <li><a href='/event_create'>Create an Event</a></li>
   <li><h2>Player List</h2>
 {{#each users}}
- <h2>Username: <a href="/user_details/{{this._id}}">{{this.username}}</a></h2>
+ <h2><a href="/user_details/{{this._id}}">{{this.username}}</a></h2>
  <p><img src="{{this.avatarURL}}" width="70" height="auto" alt="no Picture found"></p>
  {{/each}}</li>
 </ul>
+</nav>
 
-<h2>Events</h2>
-
+<div class="events-container">
 {{#each events}}
+<div class="events">
 <h1><a href="/event/{{this._id}}">{{this.eventname}}</a></h1>
  <h2>Eventdate: {{formatDate this.eventdate}}</h2>
  <h4>Creator: {{this.ownername}}</h4>
+ </div>
 {{/each}}
-
-
-<!--<form action="/logout" method="get" class="text-center mb-4">
-<button type="submit">LOGOUT</button><br>
-</form>
--->
+</div>
+</div>
