@@ -16,7 +16,7 @@
 
 {{#each events}}
 <h1><a href="/event/{{this._id}}">{{this.eventname}}</a></h1>
- <h2>Eventdate: {{this.eventdate}}</h2>
+ <h2>Eventdate: {{formatDate this.eventdate}}</h2>
  <h4>Creator: {{this.ownername}}</h4>
 {{/each}}
 

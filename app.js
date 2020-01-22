@@ -16,17 +16,21 @@ const MongoStore = require("connect-mongo")(session);
 
 hbs.registerHelper('displayLoginBar',
   (currentRoute, allowedRoutes) => {
-    //return true;
-    console.log(">>>>>>>>>>>>>>>>", currentRoute, allowedRoutes.split(' '))
       const result = allowedRoutes.split(' ')
       .some(route => {
         const testLogic = currentRoute.includes(route);
         console.log('testLogic', testLogic);
         return testLogic
       });
-      console.log(result);
       return result;
     });
+
+    hbs.registerHelper('formatDate',
+    (datestring) => {
+          return new Date(datestring).toLocaleDateString('de-DE');
+      });
+  
+
 
 mongoose
   .connect(process.env.MONGOLAB_URI, {useNewUrlParser: true})
