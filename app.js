@@ -42,7 +42,7 @@ app.use(cookieParser());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    cookie: { maxAge: 24 * 60 * 60 },
+    cookie: { maxAge: (24 * 60 * 60 * 1000) },
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
@@ -95,14 +95,12 @@ passport.use(new GoogleStrategy(
 
      User.findOne({ googleID: profile.id })
        .then(user => {
-         console.log("User from database: ", user);
          if (user) {
           return done(null, user);
         
          }
          User.create({ username: profile.displayName, email: profile._json.email, googleID: profile.id, avatarURL: profile.photos[0].value })           
          .then(newUser => {
-             console.log(newUser);
              return done(null, newUser);
 
            })
@@ -136,21 +134,21 @@ app.use('/main', main_private);
 
 const event_creator = require('./routes/private/event_creator');
 app.use('/event_create', event_creator);
-/*
+
 const event_details = require('./routes/private/event_details');
-app.use('/private/event_details', event_details);
-*/
+app.use('/event', event_details);
+
 const player_editor = require('./routes/private/player_editor');
 app.use('/user_editor', player_editor);
 
 const player_details = require('./routes/private/player_details');
 app.use('/user_details', player_details);
 
-/*
+
 //dev playground
 const lol = require('./routes/playground/lol');
 app.use('/lol', lol);
-
+/*
 //app.get('/test-route', (req, res, next) => res.send('<a href="#">You are inside /test-route</a>'))
 
 */

@@ -13,14 +13,16 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, n) => {
   if(!req.session.user) {
     return res.render('auth/login', {message: 'Session is no longer valid. Please re-login'})
   }
   const { eventname, eventdate} = req.body;
   const ownerid = req.session.user._id;
   const ownername = req.session.user.username;
-  Event.create({eventname, eventdate, ownerid, ownername})
+  const subscribers = [ownerid];
+  
+  Event.create({eventname, eventdate, ownerid, ownername, subscribers})
     .then(() => {
       res.redirect('/main')
     })
