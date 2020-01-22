@@ -1,6 +1,6 @@
 **Private Lan community**\
-*version 0.1 deployed on heroku*\
-http://plancomm.herokuapp.com/\
+*version 0.1 deployed on heroku:*\
+http://plancomm.herokuapp.com/
 
 *create, schedule or subscribe for Events*\
 
