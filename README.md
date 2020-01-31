@@ -1,3 +1,6 @@
+**DISABLED due to Beta state !!!**\
+**Main Project: https://github.com/S-Sergej/pLanComm **\
+
 **Private Lan community**\
 *version 0.1 deployed on heroku:*\
 http://plancomm.herokuapp.com/
