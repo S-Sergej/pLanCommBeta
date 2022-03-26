@@ -20,7 +20,7 @@
     "kind-of": "^6.0.3",
     "leaguejs": "^2.1.2",
     "lol-js": "^2.0.2",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "moment": "^2.24.0",
     "mongoose": "^5.2.10",
     "mongoose-findorcreate": "^3.0.0",
