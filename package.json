@@ -21,7 +21,7 @@
     "leaguejs": "^2.1.2",
     "lol-js": "^2.0.2",
     "minimist": "^1.2.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.2.10",
     "mongoose-findorcreate": "^3.0.0",
     "morgan": "^1.9.0",
